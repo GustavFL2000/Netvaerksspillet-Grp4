@@ -27,7 +27,7 @@ public class GUI extends Application {
 	public static Player me;
 	public static List<Player> players = new ArrayList<Player>();
 
-	Client client;
+	Client client; //Dfinere en client
 
 	private Label[][] fields;
 	private TextArea scoreList;
@@ -56,7 +56,7 @@ public class GUI extends Application {
 	};
 
     public GUI() throws IOException {
-		client = new Client();
+		client = new Client(); //Opretter client når vi opretter gui
     }
 
 
@@ -171,7 +171,7 @@ public class GUI extends Application {
 	}
 
 	public void playerMoved(int delta_x, int delta_y, String direction) throws IOException {
-		client.movedMessage();
+		client.movedMessage(); //Vi sender en message om at player er rykket gennem client
 		me.direction = direction;
 		int x = me.getXpos(),y = me.getYpos();
 
