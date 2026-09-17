@@ -1,5 +1,6 @@
 package game2026;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class GUI extends Application {
 
 	public static Player me;
 	public static List<Player> players = new ArrayList<Player>();
+
+	Client client;
 
 	private Label[][] fields;
 	private TextArea scoreList;
@@ -52,8 +55,12 @@ public class GUI extends Application {
 			"wwwwwwwwwwwwwwwwwwww"
 	};
 
-	
-	// -------------------------------------------
+    public GUI() throws IOException {
+		client = new Client();
+    }
+
+
+    // -------------------------------------------
 	// | Maze: (0,0)              | Score: (1,0) |
 	// |-----------------------------------------|
 	// | boardGrid (0,1)          | scorelist    |
@@ -115,10 +122,34 @@ public class GUI extends Application {
 
 			scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
 				switch (event.getCode()) {
-				case UP:    playerMoved(0,-1,"up");    break;
-				case DOWN:  playerMoved(0,+1,"down");  break;
-				case LEFT:  playerMoved(-1,0,"left");  break;
-				case RIGHT: playerMoved(+1,0,"right"); break;
+				case UP:
+                    try {
+                        playerMoved(0,-1,"up");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+				case DOWN:
+                    try {
+                        playerMoved(0,+1,"down");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+				case LEFT:
+                    try {
+                        playerMoved(-1,0,"left");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+				case RIGHT:
+                    try {
+                        playerMoved(+1,0,"right");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
 				default: break;
 				}
 			});
@@ -139,7 +170,8 @@ public class GUI extends Application {
 		}
 	}
 
-	public void playerMoved(int delta_x, int delta_y, String direction) {
+	public void playerMoved(int delta_x, int delta_y, String direction) throws IOException {
+		client.movedMessage();
 		me.direction = direction;
 		int x = me.getXpos(),y = me.getYpos();
 
