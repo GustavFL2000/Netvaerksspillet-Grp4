@@ -177,18 +177,18 @@ public class GUI extends Application {
 
 		if (board[y+delta_y].charAt(x+delta_x)=='w') {
 			me.addPoints(-1);
-			client.pointMessage(me.name,-1);
+			client.pointMessage(me.name,me.point);
 		} 
 		else {
 			Player p = getPlayerAt(x+delta_x,y+delta_y);
 			if (p!=null) {
               me.addPoints(10);
-			  client.pointMessage(me.name,10);
+			  client.pointMessage(me.name,me.point);
               p.addPoints(-10);
-			  client.pointMessage(p.name,-10);
+			  client.pointMessage(p.name,p.point);
 			} else {
 				me.addPoints(1);
-				client.pointMessage(me.name,1);
+				client.pointMessage(me.name,me.point);
 			
 				fields[x][y].setGraphic(new ImageView(image_floor));
 				x+=delta_x;
