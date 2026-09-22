@@ -22,7 +22,7 @@ public class Client {
     }
     
     public void pointMessage(String name, int points) throws IOException {
-        write.writeBytes(String.format("POINTS %s %d", name, points));
+        write.writeBytes(String.format("POINTS %s %d%n", name, points));
     }
 
     public static void main(String[] args) throws Exception {
