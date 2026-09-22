@@ -29,7 +29,7 @@ public class CentralServer {
     
     public static void sendMoveMessageToAll(String message) throws IOException {
         for (ClientHandlerThread client : clients) {
-            client.sendMessage(message); //Hvis ikke sender client(altså den client som har rykket sig)
+            client.sendMessageToClient(message); //Hvis ikke sender client(altså den client som har rykket sig)
         }
     }
 }
