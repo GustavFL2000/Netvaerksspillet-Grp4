@@ -213,9 +213,39 @@ public class GUI extends Application {
 
 				me.setXpos(x);
 				me.setYpos(y);
+
 			}
 		}
 		scoreList.setText(getScoreList());
+	}
+
+	public void moveOtherPlayer(int delta_x, int delta_y, String direction, String navn){
+		for (Player player : players) {
+			if(player.name.equals(navn)){
+				int x = player.getXpos(),y = player.getYpos();
+				fields[x][y].setGraphic(new ImageView(image_floor));
+				x+=delta_x;
+				y+=delta_y;
+
+				if (direction.equalsIgnoreCase("right")) {
+					fields[x][y].setGraphic(new ImageView(hero_right));
+				};
+				if (direction.equalsIgnoreCase("left")) {
+					fields[x][y].setGraphic(new ImageView(hero_left));
+
+				};
+				if (direction.equalsIgnoreCase("up")) {
+					fields[x][y].setGraphic(new ImageView(hero_up));
+
+				};
+				if (direction.equalsIgnoreCase("down")) {
+					fields[x][y].setGraphic(new ImageView(hero_down));
+
+				};
+				player.setXpos(x);
+				player.setYpos(y);
+			}
+		}
 	}
 
 	public String getScoreList() {
