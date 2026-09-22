@@ -22,6 +22,7 @@ public class CentralServer {
             System.out.println("Forbindelse forbundet");
             ClientHandlerThread client = new ClientHandlerThread(connectionSocket);
             clients.add(client);
+            System.out.println("---- client størrelse" + clients.size());
             client.start();
 
         }
