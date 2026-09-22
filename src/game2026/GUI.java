@@ -258,7 +258,6 @@ public class GUI extends Application {
 
 
 			}
-			scoreList.setText(getScoreList());
 		}
 
 		// Spilleren findes ikke endnu
