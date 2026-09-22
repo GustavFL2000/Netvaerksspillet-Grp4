@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.List;
 
 public class ClientHandlerThread extends Thread {
     private Socket socket;
@@ -14,7 +13,7 @@ public class ClientHandlerThread extends Thread {
         this.socket = socket;
     }
 
-    public void sendMessage(String message) throws IOException {
+    public void sendMessageToClient(String message) throws IOException {
         DataOutputStream write = new DataOutputStream(socket.getOutputStream());
         write.writeBytes(message + "\n");
     }
