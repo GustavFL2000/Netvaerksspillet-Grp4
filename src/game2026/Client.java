@@ -18,7 +18,7 @@ public class Client {
     }
 
     public void movedMessage() throws IOException {
-        write.writeBytes("Der er flyttet\n");
+        write.writeBytes("MOVE\n");
     }
 
     public static void main(String[] args) throws Exception {
