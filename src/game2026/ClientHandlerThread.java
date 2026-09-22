@@ -3,6 +3,7 @@ package game2026;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.List;
 
@@ -32,10 +33,11 @@ public class ClientHandlerThread extends Thread {
             write = new DataOutputStream(socket.getOutputStream());
             
             while (true) {
+                InetAddress socketID = socket.getInetAddress();
                 message = reader.readLine();
-                System.out.println(message); //Kan ud kommenteres så printer sevrer consollen ikke beskederbne
+                System.out.println(socketID+ ": " + message); //Kan ud kommenteres så printer sevrer consollen ikke beskederbne
                 for (ClientHandlerThread client : clients) {
-                    client.sendMessage(message); //Hvis ikke sender client(altså den client som har rykket sig )
+                    client.sendMessage(socketID+ ": " + message); //Hvis ikke sender client(altså den client som har rykket sig )
                 }                                 // skal have beskeden echoet tilbage kan vi lave et if client != sender eller sådan
 
                 //write.writeBytes(message + "\n"); //brugt til da vi kun skulle echo tilbage
