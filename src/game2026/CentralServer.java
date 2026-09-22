@@ -9,21 +9,20 @@ import java.util.List;
 
 public class CentralServer {
 
-    static List<Player> tilmeldt = new ArrayList<>();
+    static List<ClientHandlerThread> clients = new ArrayList<>();
+
 
     public static void main(String[] args) throws Exception {
-
         ServerSocket welcomeSocket = new ServerSocket(9999);
-
         System.out.println("Serveren venter på client");
 
         while (true) {
-
             Socket connectionSocket = welcomeSocket.accept();
-
             System.out.println("Forbindelse forbundet");
+            ClientHandlerThread client = new ClientHandlerThread(connectionSocket, clients);
+            clients.add(client);
+            client.start();
 
-            new ClientHandlerThread(connectionSocket, tilmeldt).start();
         }
     }
 }

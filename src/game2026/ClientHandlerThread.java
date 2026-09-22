@@ -8,12 +8,17 @@ import java.util.List;
 
 public class ClientHandlerThread extends Thread {
     private Socket socket;
+
+    private List<ClientHandlerThread> clients;
     
-    private List<Player> tilmeldt;
-    
-    public ClientHandlerThread(Socket socket, List<Player> tilmeldt) {
+    public ClientHandlerThread(Socket socket, List<ClientHandlerThread> clients) {
         this.socket = socket;
-        this.tilmeldt = tilmeldt;
+        this.clients = clients;
+    }
+
+    public void sendMessage(String message) throws IOException {
+        DataOutputStream write = new DataOutputStream(socket.getOutputStream());
+        write.writeBytes(message + "\n");
     }
     
     @Override
@@ -28,8 +33,12 @@ public class ClientHandlerThread extends Thread {
             
             while (true) {
                 message = reader.readLine();
-                System.out.println(message);
-                write.writeBytes(message + "\n");
+                System.out.println(message); //Kan ud kommenteres så printer sevrer consollen ikke beskederbne
+                for (ClientHandlerThread client : clients) {
+                    client.sendMessage(message); //Hvis ikke sender client(altså den client som har rykket sig )
+                }                                 // skal have beskeden echoet tilbage kan vi lave et if client != sender eller sådan
+
+                //write.writeBytes(message + "\n"); //brugt til da vi kun skulle echo tilbage
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
