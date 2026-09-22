@@ -153,16 +153,10 @@ public class GUI extends Application {
 				default: break;
 				}
 			});
-			
-            // Setting up standard players
-			
-			me = new Player("Orville",9,4,"up");
-			players.add(me);
-			fields[9][4].setGraphic(new ImageView(hero_up));
 
-			Player harry = new Player("Harry",14,15,"up");
-			players.add(harry);
-			fields[14][15].setGraphic(new ImageView(hero_up));
+			// Setting up standard player
+			int[] position = getRandomPosition();
+			me = addPlayer("Orville", position[0], position[1], "up");
 
 			scoreList.setText(getScoreList());
 		} catch(Exception e) {
@@ -170,6 +164,25 @@ public class GUI extends Application {
 		}
 	}
 
+	public Player addPlayer(String navn, int x, int y, String direction) {
+		Player player = new Player(navn, x, y, direction);
+		players.add(player);
+
+		if (direction.equalsIgnoreCase("right")) {
+			fields[x][y].setGraphic(new ImageView(hero_right));
+		}
+		if (direction.equalsIgnoreCase("left")) {
+			fields[x][y].setGraphic(new ImageView(hero_left));
+		}
+		if (direction.equalsIgnoreCase("up")) {
+			fields[x][y].setGraphic(new ImageView(hero_up));
+		}
+		if (direction.equalsIgnoreCase("down")) {
+			fields[x][y].setGraphic(new ImageView(hero_down));
+		}
+
+		return player;
+	}
 	public void playerMoved(int delta_x, int delta_y, String direction) throws IOException {
 		//Vi sender en message om at player er rykket gennem client
 		me.direction = direction;
@@ -196,19 +209,19 @@ public class GUI extends Application {
 
 				if (direction.equals("right")) {
 					fields[x][y].setGraphic(new ImageView(hero_right));
-					client.movedMessage(x,y,"RIGHT", me.name);
+					client.movedMessage(delta_x,delta_y,"RIGHT", me.name,x,y);
 				};
 				if (direction.equals("left")) {
 					fields[x][y].setGraphic(new ImageView(hero_left));
-					client.movedMessage(x,y,"LEFT", me.name);
+					client.movedMessage(delta_x,delta_y,"LEFT", me.name,x,y);
 				};
 				if (direction.equals("up")) {
 					fields[x][y].setGraphic(new ImageView(hero_up));
-					client.movedMessage(x,y,"UP",me.name);
+					client.movedMessage(delta_x,delta_y,"UP",me.name,x,y);
 				};
 				if (direction.equals("down")) {
 					fields[x][y].setGraphic(new ImageView(hero_down));
-					client.movedMessage(x,y,"DOWN", me.name);
+					client.movedMessage(delta_x,delta_y,"DOWN", me.name,x,y);
 				};
 
 				me.setXpos(x);
@@ -219,41 +232,58 @@ public class GUI extends Application {
 		scoreList.setText(getScoreList());
 	}
 
-	public void moveOtherPlayer(int delta_x, int delta_y, String direction, String navn){
+	public void moveOtherPlayer(int delta_x, int delta_y, String direction, String navn, int x, int y) {
 		for (Player player : players) {
 			if(player.name.equals(navn)){
-				int x = player.getXpos(),y = player.getYpos();
-				fields[x][y].setGraphic(new ImageView(image_floor));
-				x+=delta_x;
-				y+=delta_y;
+				int oldX = player.getXpos();
+				int oldY = player.getYpos();
+
+				fields[oldX][oldY].setGraphic(new ImageView(image_floor));
 
 				if (direction.equalsIgnoreCase("right")) {
 					fields[x][y].setGraphic(new ImageView(hero_right));
-				};
+				}
 				if (direction.equalsIgnoreCase("left")) {
 					fields[x][y].setGraphic(new ImageView(hero_left));
-
-				};
+				}
 				if (direction.equalsIgnoreCase("up")) {
 					fields[x][y].setGraphic(new ImageView(hero_up));
-
-				};
+				}
 				if (direction.equalsIgnoreCase("down")) {
 					fields[x][y].setGraphic(new ImageView(hero_down));
+				}
 
-				};
 				player.setXpos(x);
 				player.setYpos(y);
+
+				return;
 			}
 		}
-	}
 
+		// Spilleren findes ikke endnu
+		addPlayer(navn, x, y, direction);
+	}
 	public String getScoreList() {
 		StringBuffer b = new StringBuffer(100);
 		for (Player p : players) {
 			b.append(p+"\r\n");
 		}
 		return b.toString();
+	}
+
+	public int[] getRandomPosition() {
+		int x;
+		int y;
+
+		do {
+			x = (int) (Math.random() * 20);
+			y = (int) (Math.random() * 20);
+		} while (
+				board[y].charAt(x) == 'w' ||
+						getPlayerAt(x, y) != null
+		);
+
+		return new int[]{x, y};
 	}
 
 	public Player getPlayerAt(int x, int y) {

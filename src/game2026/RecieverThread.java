@@ -35,9 +35,11 @@ public class RecieverThread extends Thread{
                     int delta_y = Integer.parseInt(parts[2]);
                     String direction = parts[3];
                     String navn = parts[4];
+                    int x = Integer.parseInt(parts[5]);
+                    int y = Integer.parseInt(parts[6]);
 
                     Platform.runLater(() -> {
-                        gui.moveOtherPlayer(delta_x, delta_y, direction, navn);
+                        gui.moveOtherPlayer(delta_x, delta_y, direction, navn, x, y);
                     });
                 }
             }

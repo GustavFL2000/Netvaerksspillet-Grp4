@@ -21,9 +21,9 @@ public class Client {
         (new RecieverThread(clientSocket, gui)).start();
     }
 
-    public void movedMessage(int delta_x, int delta_y, String direction, String navn) throws IOException {
-        write.writeBytes(String.format("MOVE %d %d %s %s%n",
-                delta_x, delta_y, direction, navn));
+    public void movedMessage(int delta_x, int delta_y, String direction, String navn, int x, int y) throws IOException {
+        write.writeBytes(String.format("MOVE %d %d %s %s %d %d%n",
+                delta_x, delta_y, direction, navn, x, y));
     }
     
     public void pointMessage(String name, int points) throws IOException {
