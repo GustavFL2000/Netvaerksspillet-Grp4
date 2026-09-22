@@ -9,7 +9,7 @@ public class Client {
     DataOutputStream write;
 
     public Client() throws IOException {
-        Socket clientSocket = new Socket("localhost", 9999);
+        Socket clientSocket = new Socket("10.10.139.104", 9999);
         System.out.println("Forbindelse forbundet");
 
         write = new DataOutputStream(clientSocket.getOutputStream());
