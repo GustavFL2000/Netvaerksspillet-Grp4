@@ -9,12 +9,9 @@ import java.util.List;
 
 public class ClientHandlerThread extends Thread {
     private Socket socket;
-
-    private List<ClientHandlerThread> clients;
     
-    public ClientHandlerThread(Socket socket, List<ClientHandlerThread> clients) {
+    public ClientHandlerThread(Socket socket) {
         this.socket = socket;
-        this.clients = clients;
     }
 
     public void sendMessage(String message) throws IOException {
@@ -36,9 +33,9 @@ public class ClientHandlerThread extends Thread {
                 InetAddress socketID = socket.getInetAddress();
                 message = reader.readLine();
                 System.out.println(socketID+ ": " + message); //Kan ud kommenteres så printer sevrer consollen ikke beskederbne
-                for (ClientHandlerThread client : clients) {
-                    client.sendMessage(socketID+ ": " + message); //Hvis ikke sender client(altså den client som har rykket sig )
-                }                                 // skal have beskeden echoet tilbage kan vi lave et if client != sender eller sådan
+                if (message.contains("MOVE")) {
+                    CentralServer.sendMoveMessageToAll(socketID+ ": " + message);   // skal have beskeden echoet tilbage kan vi lave et if client != sender eller sådan
+                }
 
                 //write.writeBytes(message + "\n"); //brugt til da vi kun skulle echo tilbage
             }
