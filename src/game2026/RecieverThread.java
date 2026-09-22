@@ -13,22 +13,22 @@ public class RecieverThread extends Thread{
         this.conSocket = conSocket;
     }
 
-    public void run (){
+    public void run() {
         String recievedSentence = "";
 
         try {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(conSocket.getInputStream())
+            );
+
             while (true) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conSocket.getInputStream()));
                 recievedSentence = reader.readLine();
                 System.out.println(recievedSentence);
             }
-            //conSocket.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
 

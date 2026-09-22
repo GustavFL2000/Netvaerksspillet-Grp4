@@ -21,12 +21,10 @@ public class ClientHandlerThread extends Thread {
     @Override
     public void run() {
         BufferedReader reader;
-        DataOutputStream write;
         String message = null;
         
         try {
             reader = new BufferedReader(new java.io.InputStreamReader(socket.getInputStream()));
-            write = new DataOutputStream(socket.getOutputStream());
             
             while (true) {
                 InetAddress socketID = socket.getInetAddress();
