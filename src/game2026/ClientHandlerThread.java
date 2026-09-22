@@ -31,10 +31,10 @@ public class ClientHandlerThread extends Thread {
                 message = reader.readLine();
                 System.out.println(socketID+ ": " + message); //Kan ud kommenteres så printer sevrer consollen ikke beskederbne
                 if (message.contains("MOVE")) {
-                    CentralServer.sendMoveMessageToAll(socketID+ ": " + message);   // skal have beskeden echoet tilbage kan vi lave et if client != sender eller sådan
+                    CentralServer.sendMoveMessageToAll(message);   // skal have beskeden echoet tilbage kan vi lave et if client != sender eller sådan
                 }
                 if (message.contains("POINT")) {
-                    CentralServer.sendMoveMessageToAll(socketID+ ": " + message);
+                    CentralServer.sendMoveMessageToAll(message);
                 }
 
                 //write.writeBytes(message + "\n"); //brugt til da vi kun skulle echo tilbage

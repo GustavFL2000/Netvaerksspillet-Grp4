@@ -9,19 +9,21 @@ import java.util.List;
 public class Client {
 
     DataOutputStream write;
+    GUI gui;
 
-    public Client() throws IOException {
+    public Client(GUI gui) throws IOException {
         Socket clientSocket = new Socket("localhost", 9999);
         System.out.println("Forbindelse forbundet");
+        this.gui = gui;
 
         write = new DataOutputStream(clientSocket.getOutputStream());
 
-        (new RecieverThread(clientSocket)).start();
-
+        (new RecieverThread(clientSocket, gui)).start();
     }
 
-    public void movedMessage(int x, int y, String direction) throws IOException {
-        write.writeBytes(String.format("MOVE %d %d %s%n", x, y, direction));
+    public void movedMessage(int delta_x, int delta_y, String direction, String navn) throws IOException {
+        write.writeBytes(String.format("MOVE %d %d %s %s%n",
+                delta_x, delta_y, direction, navn));
     }
     
     public void pointMessage(String name, int points) throws IOException {
@@ -32,7 +34,4 @@ public class Client {
         return recievedMessage.split(" ");
     }
 
-    public static void main(String[] args) throws Exception {
-        new Client();
-    }
 }

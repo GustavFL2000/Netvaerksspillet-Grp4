@@ -56,7 +56,7 @@ public class GUI extends Application {
 	};
 
     public GUI() throws IOException {
-		client = new Client(); //Opretter client når vi opretter gui
+		client = new Client(this); //Opretter client når vi opretter gui
     }
 
 
@@ -196,19 +196,19 @@ public class GUI extends Application {
 
 				if (direction.equals("right")) {
 					fields[x][y].setGraphic(new ImageView(hero_right));
-					client.movedMessage(x,y,"RIGHT");
+					client.movedMessage(x,y,"RIGHT", me.name);
 				};
 				if (direction.equals("left")) {
 					fields[x][y].setGraphic(new ImageView(hero_left));
-					client.movedMessage(x,y,"LEFT");
+					client.movedMessage(x,y,"LEFT", me.name);
 				};
 				if (direction.equals("up")) {
 					fields[x][y].setGraphic(new ImageView(hero_up));
-					client.movedMessage(x,y,"UP");
+					client.movedMessage(x,y,"UP",me.name);
 				};
 				if (direction.equals("down")) {
 					fields[x][y].setGraphic(new ImageView(hero_down));
-					client.movedMessage(x,y,"DOWN");
+					client.movedMessage(x,y,"DOWN", me.name);
 				};
 
 				me.setXpos(x);
