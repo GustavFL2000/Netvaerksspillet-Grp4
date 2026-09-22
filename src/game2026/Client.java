@@ -17,8 +17,8 @@ public class Client {
         (new RecieverThread(clientSocket)).start();
     }
 
-    public void movedMessage() throws IOException {
-        write.writeBytes("Der er flyttet\n");
+    public void movedMessage(int x, int y, String direction) throws IOException {
+        write.writeBytes(String.format("MOVE %d %d %s%n", x, y, direction));
     }
 
     public static void main(String[] args) throws Exception {

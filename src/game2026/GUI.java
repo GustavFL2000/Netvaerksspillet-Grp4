@@ -171,7 +171,7 @@ public class GUI extends Application {
 	}
 
 	public void playerMoved(int delta_x, int delta_y, String direction) throws IOException {
-		client.movedMessage(); //Vi sender en message om at player er rykket gennem client
+		//Vi sender en message om at player er rykket gennem client
 		me.direction = direction;
 		int x = me.getXpos(),y = me.getYpos();
 
@@ -192,15 +192,19 @@ public class GUI extends Application {
 
 				if (direction.equals("right")) {
 					fields[x][y].setGraphic(new ImageView(hero_right));
+					client.movedMessage(x,y,"RIGHT");
 				};
 				if (direction.equals("left")) {
 					fields[x][y].setGraphic(new ImageView(hero_left));
+					client.movedMessage(x,y,"LEFT");
 				};
 				if (direction.equals("up")) {
 					fields[x][y].setGraphic(new ImageView(hero_up));
+					client.movedMessage(x,y,"UP");
 				};
 				if (direction.equals("down")) {
 					fields[x][y].setGraphic(new ImageView(hero_down));
+					client.movedMessage(x,y,"DOWN");
 				};
 
 				me.setXpos(x);
