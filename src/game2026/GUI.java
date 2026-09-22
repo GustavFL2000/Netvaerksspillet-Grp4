@@ -256,8 +256,9 @@ public class GUI extends Application {
 				player.setXpos(x);
 				player.setYpos(y);
 
-				return;
+
 			}
+			scoreList.setText(getScoreList());
 		}
 
 		// Spilleren findes ikke endnu
