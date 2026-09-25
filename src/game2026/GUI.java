@@ -184,50 +184,16 @@ public class GUI extends Application {
 		return player;
 	}
 	public void playerMoved(int delta_x, int delta_y, String direction) throws IOException {
-		//Vi sender en message om at player er rykket gennem client
+		// The server validates occupancy before committing the move.
 		me.direction = direction;
 		int x = me.getXpos(),y = me.getYpos();
 
 		if (board[y+delta_y].charAt(x+delta_x)=='w') {
-			me.addPoints(-1);
 			client.pointMessage(me.name,-1);
 		} 
 		else {
-			Player p = getPlayerAt(x+delta_x,y+delta_y);
-			if (p!=null) {
-              me.addPoints(10);
-			  client.pointMessage(me.name,10);
-              p.addPoints(-10);
-			  client.pointMessage(p.name,-10);
-			} else {
-				me.addPoints(1);
-				client.pointMessage(me.name,1);
-			
-				fields[x][y].setGraphic(new ImageView(image_floor));
-				x+=delta_x;
-				y+=delta_y;
-
-				if (direction.equals("right")) {
-					client.movedMessage(x,y,"RIGHT", me.name,delta_x,delta_y);
-					fields[x][y].setGraphic(new ImageView(hero_right));
-				};
-				if (direction.equals("left")) {
-					client.movedMessage(x,y,"LEFT", me.name,delta_x,delta_y);
-					fields[x][y].setGraphic(new ImageView(hero_left));
-				};
-				if (direction.equals("up")) {
-					client.movedMessage(x,y,"UP",me.name,delta_x,delta_y);
-					fields[x][y].setGraphic(new ImageView(hero_up));
-				};
-				if (direction.equals("down")) {
-					client.movedMessage(x,y,"DOWN", me.name,delta_x,delta_y);
-					fields[x][y].setGraphic(new ImageView(hero_down));
-				};
-
-				me.setXpos(x);
-				me.setYpos(y);
-
-			}
+			client.movedMessage(x + delta_x, y + delta_y, direction.toUpperCase(),
+					me.name, x, y);
 		}
 		scoreList.setText(getScoreList());
 	}
@@ -303,4 +269,3 @@ public class GUI extends Application {
 
 	
 }
-

@@ -20,7 +20,7 @@ public class Client {
     }
 
     public void movedMessage(int x, int y, String direction, String navn, int delta_x, int delta_y) throws IOException {
-        write.writeBytes(String.format("MOVE %d %d %s %s %d %d%n",
+        write.writeBytes(String.format("MOVE_REQUEST %d %d %s %s %d %d%n",
                 x, y, direction, navn, delta_x, delta_y));
     }
     

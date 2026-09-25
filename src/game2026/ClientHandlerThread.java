@@ -30,10 +30,10 @@ public class ClientHandlerThread extends Thread {
                 InetAddress socketID = socket.getInetAddress();
                 message = reader.readLine();
                 System.out.println(message); //Kan ud kommenteres så printer sevrer consollen ikke beskederbne
-                if (message.contains("MOVE")) {
-                    CentralServer.sendMoveMessageToAll(message, this);   // skal have beskeden echoet tilbage kan vi lave et if client != sender eller sådan
+                if (message.startsWith("MOVE_REQUEST")) {
+                    CentralServer.handleMoveRequest(message, this);
                 }
-                if (message.contains("POINT")) {
+                if (message.startsWith("POINTS")) {
                     CentralServer.sendMoveMessageToAll(message,this);
                 }
 
