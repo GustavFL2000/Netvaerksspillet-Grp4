@@ -209,19 +209,19 @@ public class GUI extends Application {
 
 				if (direction.equals("right")) {
 					client.movedMessage(x,y,"RIGHT", me.name,delta_x,delta_y);
-					fields[x][y].setGraphic(new ImageView(hero_right));
+					//fields[x][y].setGraphic(new ImageView(hero_right));
 				};
 				if (direction.equals("left")) {
 					client.movedMessage(x,y,"LEFT", me.name,delta_x,delta_y);
-					fields[x][y].setGraphic(new ImageView(hero_left));
+					//fields[x][y].setGraphic(new ImageView(hero_left));
 				};
 				if (direction.equals("up")) {
 					client.movedMessage(x,y,"UP",me.name,delta_x,delta_y);
-					fields[x][y].setGraphic(new ImageView(hero_up));
+					//fields[x][y].setGraphic(new ImageView(hero_up));
 				};
 				if (direction.equals("down")) {
 					client.movedMessage(x,y,"DOWN", me.name,delta_x,delta_y);
-					fields[x][y].setGraphic(new ImageView(hero_down));
+					//fields[x][y].setGraphic(new ImageView(hero_down));
 				};
 
 				me.setXpos(x);

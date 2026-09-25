@@ -27,9 +27,8 @@ public class CentralServer {
     }
     public synchronized static void sendMoveMessageToAll(String message, ClientHandlerThread sender) throws IOException {
         for (ClientHandlerThread client : clients) {
-            if (client != sender) {
                 client.sendMessageToClient(message);
-            }
+
         }
     }
 }
