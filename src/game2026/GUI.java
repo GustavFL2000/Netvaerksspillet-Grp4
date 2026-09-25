@@ -232,7 +232,7 @@ public class GUI extends Application {
 		scoreList.setText(getScoreList());
 	}
 
-	public void moveOtherPlayer(int delta_x, int delta_y, String direction, String navn, int x, int y) {
+	public void moveOtherPlayer(int x, int y, String direction, String navn) {
 		for (Player player : players) {
 			if(player.name.equals(navn)){
 				int oldX = player.getXpos();

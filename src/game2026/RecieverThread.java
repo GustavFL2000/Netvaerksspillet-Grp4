@@ -39,7 +39,7 @@ public class RecieverThread extends Thread{
                     int delta_y = Integer.parseInt(parts[6]);
 
                     Platform.runLater(() -> {
-                        gui.moveOtherPlayer(x, y, direction, navn, delta_x, delta_y);
+                        gui.moveOtherPlayer(x, y, direction, navn);
                     });
                 }
                 if(parts[0].equals("POINTS")){
