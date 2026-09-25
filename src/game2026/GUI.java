@@ -238,6 +238,7 @@ public class GUI extends Application {
 				player.point = point;
 			}
 		}
+		scoreList.setText(getScoreList());
 	}
 
 	public void moveOtherPlayer(int x, int y, String direction, String navn) {
