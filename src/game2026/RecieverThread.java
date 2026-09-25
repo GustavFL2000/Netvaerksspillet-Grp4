@@ -36,14 +36,12 @@ public class RecieverThread extends Thread{
                     String direction = parts[3];
                     String navn = parts[4];
                     
-                    if (!gui.getScoreList().contains(navn)) {
-                        gui.addPlayer(navn, x, y, direction);
-                    }
-                    
-                    int delta_x = Integer.parseInt(parts[5]);
-                    int delta_y = Integer.parseInt(parts[6]);
+
 
                     Platform.runLater(() -> {
+                        if (!gui.getScoreList().contains(navn)) {
+                            gui.addPlayer(navn, x, y, direction);
+                        }
                         gui.moveOtherPlayer(x, y, direction, navn);
                     });
                 }
