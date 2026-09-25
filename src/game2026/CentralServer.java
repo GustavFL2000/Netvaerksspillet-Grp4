@@ -29,6 +29,7 @@ public class CentralServer {
 
         while (true) {
             Socket connectionSocket = welcomeSocket.accept();
+            connectionSocket.setTcpNoDelay(true);
             System.out.println("Forbindelse forbundet");
             ClientHandlerThread client = new ClientHandlerThread(connectionSocket);
             clients.add(client);

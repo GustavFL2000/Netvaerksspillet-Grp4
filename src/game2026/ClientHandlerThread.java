@@ -8,13 +8,15 @@ import java.net.Socket;
 
 public class ClientHandlerThread extends Thread {
     private final Socket socket;
+    private DataOutputStream write;
     
-    public ClientHandlerThread(Socket socket) {
+    public ClientHandlerThread(Socket socket) throws IOException {
         this.socket = socket;
+        this.write = new DataOutputStream(socket.getOutputStream());
+        socket.setTcpNoDelay(true);
     }
 
     public void sendMessageToClient(String message) throws IOException {
-        DataOutputStream write = new DataOutputStream(socket.getOutputStream());
         write.writeBytes(message + "\n");
     }
     

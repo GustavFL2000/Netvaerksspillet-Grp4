@@ -11,6 +11,7 @@ public class Client {
 
     public Client(GUI gui) throws IOException {
         Socket clientSocket = new Socket("localhost", 9999);
+        clientSocket.setTcpNoDelay(true);
         System.out.println("Forbindelse forbundet");
         this.gui = gui;
 
