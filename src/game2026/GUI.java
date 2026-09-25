@@ -232,6 +232,14 @@ public class GUI extends Application {
 		scoreList.setText(getScoreList());
 	}
 
+	public void updatePoints(String name, int point){
+		for (Player player : players){
+			if(player.name.equalsIgnoreCase(name)){
+				player.point = point;
+			}
+		}
+	}
+
 	public void moveOtherPlayer(int x, int y, String direction, String navn) {
 		for (Player player : players) {
 			if(player.name.equals(navn)){

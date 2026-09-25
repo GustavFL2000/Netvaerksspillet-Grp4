@@ -45,6 +45,10 @@ public class RecieverThread extends Thread{
                 if(parts[0].equals("POINTS")){
                     String navn = parts[1];
                     int points = Integer.parseInt(parts[2]);
+
+                    Platform.runLater(() ->{
+                        gui.updatePoints(navn,points);
+                    });
                 }
 
             }
