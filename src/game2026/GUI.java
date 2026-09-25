@@ -264,6 +264,8 @@ public class GUI extends Application {
 				player.setXpos(x);
 				player.setYpos(y);
 
+				scoreList.setText(getScoreList());
+
 
 			}
 		}
