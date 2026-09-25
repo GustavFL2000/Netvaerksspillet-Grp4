@@ -208,20 +208,20 @@ public class GUI extends Application {
 				y+=delta_y;
 
 				if (direction.equals("right")) {
-					fields[x][y].setGraphic(new ImageView(hero_right));
 					client.movedMessage(x,y,"RIGHT", me.name,delta_x,delta_y);
+					fields[x][y].setGraphic(new ImageView(hero_right));
 				};
 				if (direction.equals("left")) {
-					fields[x][y].setGraphic(new ImageView(hero_left));
 					client.movedMessage(x,y,"LEFT", me.name,delta_x,delta_y);
+					fields[x][y].setGraphic(new ImageView(hero_left));
 				};
 				if (direction.equals("up")) {
-					fields[x][y].setGraphic(new ImageView(hero_up));
 					client.movedMessage(x,y,"UP",me.name,delta_x,delta_y);
+					fields[x][y].setGraphic(new ImageView(hero_up));
 				};
 				if (direction.equals("down")) {
-					fields[x][y].setGraphic(new ImageView(hero_down));
 					client.movedMessage(x,y,"DOWN", me.name,delta_x,delta_y);
+					fields[x][y].setGraphic(new ImageView(hero_down));
 				};
 
 				me.setXpos(x);
