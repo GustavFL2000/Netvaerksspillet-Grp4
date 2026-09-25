@@ -31,17 +31,22 @@ public class RecieverThread extends Thread{
                 String[] parts = gui.client.splitSentence(recievedSentence);
 
                 if (parts[0].equals("MOVE")) {
-                    int delta_x = Integer.parseInt(parts[1]);
-                    int delta_y = Integer.parseInt(parts[2]);
+                    int x = Integer.parseInt(parts[1]);
+                    int y = Integer.parseInt(parts[2]);
                     String direction = parts[3];
                     String navn = parts[4];
-                    int x = Integer.parseInt(parts[5]);
-                    int y = Integer.parseInt(parts[6]);
+                    int delta_x = Integer.parseInt(parts[5]);
+                    int delta_y = Integer.parseInt(parts[6]);
 
                     Platform.runLater(() -> {
-                        gui.moveOtherPlayer(delta_x, delta_y, direction, navn, x, y);
+                        gui.moveOtherPlayer(x, y, direction, navn, delta_x, delta_y);
                     });
                 }
+                if(parts[0].equals("POINTS")){
+                    String navn = parts[1];
+                    int points = Integer.parseInt(parts[2]);
+                }
+
             }
 
         } catch (IOException e) {

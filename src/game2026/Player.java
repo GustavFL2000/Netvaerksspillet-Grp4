@@ -5,8 +5,6 @@ public class Player {
 	int ypos;
 	int point;
 	String direction;
-	String ip;
-	int port;
 
 	public Player(String name, int xpos, int ypos, String direction) {
 		this.name = name;

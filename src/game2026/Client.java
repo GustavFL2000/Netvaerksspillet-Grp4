@@ -3,8 +3,6 @@ package game2026;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Client {
 
@@ -21,9 +19,9 @@ public class Client {
         (new RecieverThread(clientSocket, gui)).start();
     }
 
-    public void movedMessage(int delta_x, int delta_y, String direction, String navn, int x, int y) throws IOException {
+    public void movedMessage(int x, int y, String direction, String navn, int delta_x, int delta_y) throws IOException {
         write.writeBytes(String.format("MOVE %d %d %s %s %d %d%n",
-                delta_x, delta_y, direction, navn, x, y));
+                x, y, direction, navn, delta_x, delta_y));
     }
     
     public void pointMessage(String name, int points) throws IOException {

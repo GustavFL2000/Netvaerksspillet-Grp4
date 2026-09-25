@@ -156,7 +156,7 @@ public class GUI extends Application {
 
 			// Setting up standard player
 			int[] position = getRandomPosition();
-			me = addPlayer("Orville", position[0], position[1], "up");
+			me = addPlayer("Gustav", position[0], position[1], "up");
 
 			scoreList.setText(getScoreList());
 		} catch(Exception e) {
@@ -209,19 +209,19 @@ public class GUI extends Application {
 
 				if (direction.equals("right")) {
 					fields[x][y].setGraphic(new ImageView(hero_right));
-					client.movedMessage(delta_x,delta_y,"RIGHT", me.name,x,y);
+					client.movedMessage(x,y,"RIGHT", me.name,delta_x,delta_y);
 				};
 				if (direction.equals("left")) {
 					fields[x][y].setGraphic(new ImageView(hero_left));
-					client.movedMessage(delta_x,delta_y,"LEFT", me.name,x,y);
+					client.movedMessage(x,y,"LEFT", me.name,delta_x,delta_y);
 				};
 				if (direction.equals("up")) {
 					fields[x][y].setGraphic(new ImageView(hero_up));
-					client.movedMessage(delta_x,delta_y,"UP",me.name,x,y);
+					client.movedMessage(x,y,"UP",me.name,delta_x,delta_y);
 				};
 				if (direction.equals("down")) {
 					fields[x][y].setGraphic(new ImageView(hero_down));
-					client.movedMessage(delta_x,delta_y,"DOWN", me.name,x,y);
+					client.movedMessage(x,y,"DOWN", me.name,delta_x,delta_y);
 				};
 
 				me.setXpos(x);
@@ -278,10 +278,7 @@ public class GUI extends Application {
 		do {
 			x = (int) (Math.random() * 20);
 			y = (int) (Math.random() * 20);
-		} while (
-				board[y].charAt(x) == 'w' ||
-						getPlayerAt(x, y) != null
-		);
+		} while (board[y].charAt(x) == 'w' || getPlayerAt(x, y) != null);
 
 		return new int[]{x, y};
 	}

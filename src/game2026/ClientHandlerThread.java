@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 public class ClientHandlerThread extends Thread {
-    private Socket socket;
+    private final Socket socket;
     
     public ClientHandlerThread(Socket socket) {
         this.socket = socket;
@@ -21,7 +21,7 @@ public class ClientHandlerThread extends Thread {
     @Override
     public void run() {
         BufferedReader reader;
-        String message = null;
+        String message;
         
         try {
             reader = new BufferedReader(new java.io.InputStreamReader(socket.getInputStream()));
@@ -29,7 +29,7 @@ public class ClientHandlerThread extends Thread {
             while (true) {
                 InetAddress socketID = socket.getInetAddress();
                 message = reader.readLine();
-                System.out.println(socketID+ ": " + message); //Kan ud kommenteres så printer sevrer consollen ikke beskederbne
+                System.out.println(message); //Kan ud kommenteres så printer sevrer consollen ikke beskederbne
                 if (message.contains("MOVE")) {
                     CentralServer.sendMoveMessageToAll(message, this);   // skal have beskeden echoet tilbage kan vi lave et if client != sender eller sådan
                 }
