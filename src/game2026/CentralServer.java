@@ -1,7 +1,5 @@
 package game2026;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,8 +25,7 @@ public class CentralServer {
 
         }
     }
-
-    public static void sendMoveMessageToAll(String message, ClientHandlerThread sender) throws IOException {
+    public synchronized static void sendMoveMessageToAll(String message, ClientHandlerThread sender) throws IOException {
         for (ClientHandlerThread client : clients) {
             if (client != sender) {
                 client.sendMessageToClient(message);
