@@ -156,12 +156,25 @@ public class GUI extends Application {
 
 			// Setting up standard player
 			int[] position = getRandomPosition();
-			me = addPlayer("Gustav", position[0], position[1], "up");
+			String navn = namePromt();
+			me = addPlayer(navn, position[0], position[1], "up");
 
 			scoreList.setText(getScoreList());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private String namePromt() {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Choose a name");
+		dialog.setHeaderText("Enter your player name");
+		dialog.setContentText("Name:");
+
+		return dialog.showAndWait()
+				.map(String::trim)
+				.filter(name -> !name.isEmpty())
+				.orElse("Player");
 	}
 
 	public Player addPlayer(String navn, int x, int y, String direction) {
