@@ -269,9 +269,7 @@ public class GUI extends Application {
 
 			}
 		}
-
-		// Spilleren findes ikke endnu
-		addPlayer(navn, x, y, direction);
+		scoreList.setText(getScoreList());
 	}
 	public String getScoreList() {
 		StringBuffer b = new StringBuffer(100);
